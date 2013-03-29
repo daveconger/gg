@@ -34,10 +34,10 @@
 		function ggChange(event) {
 			rollIn = Number(document.getElementById('roll').value);
 			pitchIn = Number(document.getElementById('pitch').value);
-			ga.setAtt(rollIn,pitchIn);
-			gs.setSpeed(Number(document.getElementById('speed').value));
-			gc.setCompass(Number(document.getElementById('compass').value));
-			gd.setDual(Number(document.getElementById('batt').value),Number(document.getElementById('comm').value));
+			ga.set(rollIn,pitchIn);
+			gs.set(Number(document.getElementById('speed').value));
+			gc.set(Number(document.getElementById('compass').value));
+			gd.set(Number(document.getElementById('batt').value),Number(document.getElementById('comm').value));
 		}
 		document.getElementById('speed').onchange = ggChange;
 		document.getElementById('roll').onchange = ggChange;

@@ -129,7 +129,7 @@ AttMeter: function() {
 		ggGroup.scale(this.scale,ggCenter);
 		view.draw();
 
-		this.setAtt = function(rollIn,pitchIn) {
+		this.set = function(rollIn,pitchIn) {
 			if (pitchIn != 0) {
 				pitchIn = -1*(pitchIn/Math.abs(pitchIn))*Math.min(Math.abs(pitchIn),90);
 			}
@@ -246,7 +246,7 @@ SpeedMeter: function() {
 
 		view.draw();
 
-		this.setSpeed = function(speedIn) {
+		this.set = function(speedIn) {
 			if (speedIn < 0) {
 				speedIn = Math.max(speedIn,-1*this.maxSpeed);
 				speedIn = -1*speedIn;
@@ -380,7 +380,7 @@ CompassMeter: function() {
 
 		view.draw();
 
-		this.setCompass = function(angle) {
+		this.set = function(angle) {
 			angle2 = ggNeedleVector.angle - angle;
 			tickPlane.rotate(angle2,ggCenter);
 			ggNeedleVector.angle = angle;
@@ -492,7 +492,7 @@ DualMeter: function() {
 		ggNeedleR.opacity = 0.7;
 		ggGroup.addChild(ggNeedleR);
 
-		ggNeedleVector.angle = this.zeroL; //set up for setDual()
+		ggNeedleVector.angle = this.zeroL; //set up for set()
 
 		// PIN
 		var ggPinL = new Path.Circle(centerL,1);
@@ -511,7 +511,7 @@ DualMeter: function() {
 		centerR = ggCenter.add([12*this.scale,0]); //adjust center
 		view.draw();
 
-		this.setDual = function(lIn,rIn) {
+		this.set = function(lIn,rIn) {
 			lIn = Math.min(lIn,this.maxL);
 			angle = 2*(180-this.zeroL)*lIn/this.maxL + this.zeroL;
 			angle2 = angle - ggNeedleVector.angle;
