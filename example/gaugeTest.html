@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<script type="text/javascript" src="../lib/paper.js"></script>
+	<script type="text/javascript" src="../src/gg.js"></script>
+	<script type="text/javascript">
+
+	window.onload = function() {
+		var canvas = document.getElementById('canvas');
+		paper.install(window);
+		paper.setup(canvas);
+
+		var compassCenter = view.center;
+		var gaugeScale = 0.8;
+
+		var gc = new gg.CompassMeter();
+		gc.scale = 2*gaugeScale;
+		gc.create(compassCenter);
+
+		var ga = new gg.AttMeter();
+		ga.scale = 1.2*gaugeScale;
+		ga.create(compassCenter.add([150*gaugeScale,65*gaugeScale]));
+
+		var gs = new gg.SpeedMeter();
+		gs.scale = 1.60*gaugeScale;
+		gs.create(compassCenter.add([-180*gaugeScale,30*gaugeScale]));
+
+		var gd = new gg.DualMeter();
+		gd.scale = 1*gaugeScale;
+		gd.create(compassCenter.add([140*gaugeScale,-65*gaugeScale]));
+
+		// UPDATE
+		function ggChange(event) {
+			rollIn = Number(document.getElementById('roll').value);
+			pitchIn = Number(document.getElementById('pitch').value);
+			ga.setAtt(rollIn,pitchIn);
+			gs.setSpeed(Number(document.getElementById('speed').value));
+			gc.setCompass(Number(document.getElementById('compass').value));
+			gd.setDual(Number(document.getElementById('batt').value),Number(document.getElementById('comm').value));
+		}
+		document.getElementById('speed').onchange = ggChange;
+		document.getElementById('roll').onchange = ggChange;
+		document.getElementById('pitch').onchange = ggChange;
+		document.getElementById('compass').onchange = ggChange;
+		document.getElementById('batt').onchange = ggChange;
+		document.getElementById('comm').onchange = ggChange;
+		ggChange(0);
+	}
+
+	</script>
+</head>
+<body>
+	<canvas id="canvas" width="900" height="300"></canvas>
+	<form>
+		speed:<input type="text" id="speed" value="1.16" size="8">
+		roll:<input type="text" id="roll" value="45.98" size="8">
+		pitch:<input type="text" id="pitch" value="-25.45" size="8">
+		compass:<input type="text" id="compass" value="123.078" size="8">
+		batt:<input type="text" id="batt" value="56" size="8">
+		comm:<input type="text" id="comm" value="23" size="8">
+	</form>
+</body>
+</html>
